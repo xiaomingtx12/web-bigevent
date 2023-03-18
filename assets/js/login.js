@@ -33,7 +33,8 @@ $(function () {
     e.preventDefault()
     // 发起ajax请求
     var date ={ username: $('#form_reg [name=username]').val(), password: $('#form_reg [name=password]').val()}
-    $.post('http://www.liulongbin.top:3007/api/reguser',date
+    $.post('/api/reguser',
+    date
       ,
         function(res) {
           if (res.status!== 0) {
@@ -41,6 +42,10 @@ $(function () {
             return layer.msg(res.message)
           }
           layer.msg('注册成功，请登录')
+          // layer.open({
+          //   title: '提示'
+          //   ,content: '登录成功'
+          // })
           // 模拟人的点击行为
           $('#link_login').click()
         
@@ -53,7 +58,7 @@ $(function () {
       // 阻止默认提交行为
       e.preventDefault()
       $.ajax({
-        url:'http://www.liulongbin.top:3007/api/login',
+        url:'/api/login',
         method:'POST',
         // 快速获取表单数据
         data:$(this).serialize(),
@@ -62,6 +67,10 @@ $(function () {
             return layer.msg('登陆失败')
           }
           layer.msg('登陆成功')
+          // layer.open({
+          //   title: '提示'
+          //   ,content: '登录成功'
+          // })
           // console.log(res.token);
           //将登录成功得到的token字符串，保存到localstorage中
           localStorage.setItem('token',res.token)
